@@ -1,0 +1,46 @@
+CREATE TABLE Usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    nickname VARCHAR(50) NOT NULL UNIQUE,
+    bio VARCHAR(255),
+    foto VARCHAR(255),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME DEFAULT NULL
+);
+
+CREATE TABLE Post (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    foto VARCHAR(255) NOT NULL,
+    legenda VARCHAR(255),
+    localizacao VARCHAR(100),
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME DEFAULT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Comentario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    post_id INT NOT NULL,
+    conteudo VARCHAR(255) NOT NULL,
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES Post(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Curtida (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    post_id INT NOT NULL,
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES Post(id)
+        ON DELETE CASCADE
+);

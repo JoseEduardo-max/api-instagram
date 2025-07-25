@@ -1,0 +1,66 @@
+openapi: 3.1.1
+info:
+  title: API de exemplo do instagram
+  version: 0.0.1
+  description: Uma API de teste.
+  
+
+paths:
+  /api/users:
+    get:
+      tags:
+        - [Users]
+      description: Retorna uma lista de usuários.
+    post:
+      tags:
+        - [Users]
+      description: Cria um novo usuário.
+
+  /api/users/{id}:
+    get:
+      tags:
+        - [Users]
+      description: Retorna um usuário específico.
+    put:
+      tags:
+        - [Users]
+    delete:
+      tags:
+        - [Users]
+
+
+
+  /api/posts:
+    get:
+      tags:
+        - [Posts]
+      description: Retorna uma lista de posts.
+    post:
+      tags:
+        - [Posts]
+      description: Cria um novo post.
+  
+  /api/posts/{id}:
+    get:
+      tags:
+        - [Posts]
+      description: Retorna um post específico.
+
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: "João Silva"
+        username:
+          type: string
+          example: "joao.silva"
+        profile_picture:
+          type: string
+          format: uri
